@@ -13,7 +13,6 @@ class Solution{
     void convertToWave(int n, vector<int>& arr){
         
         // Your code here
-        sort(arr.begin(),arr.end());
         for(int i=1;i<n;i+=2)
         {
             swap(arr[i],arr[i-1]);
