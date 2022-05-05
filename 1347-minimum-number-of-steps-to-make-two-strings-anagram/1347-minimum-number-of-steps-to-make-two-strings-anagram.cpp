@@ -1,15 +1,15 @@
 class Solution {
 public:
     int minSteps(string s, string t) {
-        unordered_map<char,int>mp;
+        int mp[123]={0};
         int ans=0;
         for(auto i:s)
             mp[i]++;
         for(auto i:t)
             mp[i]--;
-        for(auto i:mp)
+        for(int i=0;i<123;i++)
         {
-            ans+=max(0,i.second);
+            ans+=max(0,mp[i]);
         }
         return ans;
     }
