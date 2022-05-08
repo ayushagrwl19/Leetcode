@@ -1,15 +1,15 @@
 class Solution {
 public:
     int numberOfSubstrings(string s) {
-        map<char,int>mp;
+        int mp[3]={0};
         int i=0,j=0,ans=0,n=s.length();
         while(i<n)
         {
-            mp[s[i]]++;
-            while(mp['a']>0&&mp['b']>0&&mp['c']>0)
+            mp[s[i]-'a']++;
+            while(mp[0]>0&&mp[1]>0&&mp[2]>0)
             {
                 ans+=n-i;
-                mp[s[j]]--;
+                mp[s[j]-'a']--;
                 j++;
             }
             i++;
