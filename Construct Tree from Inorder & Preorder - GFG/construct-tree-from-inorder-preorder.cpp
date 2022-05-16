@@ -42,13 +42,8 @@ struct Node
 int j;
 void solve(int in[],int pre[],int l,int r,Node* ptr,int vis[],int n)
 {
-    while(j<n)
-    {
-        if(vis[j]==0)
-        break;
-        j++;
-    }
     ptr->data=pre[j];
+   // cout<<j<<" "<<l<<" "<<r<<endl;;
     vis[j]=1;
     Node *left=(Node*) malloc(sizeof(Node));
     Node *right=(Node*) malloc(sizeof(Node));
@@ -62,17 +57,22 @@ void solve(int in[],int pre[],int l,int r,Node* ptr,int vis[],int n)
            break;
         }
     }
+    j++;
     if(l<=i-1)
     {
         ptr->left=left;
-     solve(in,pre,l,i-1,left,vis,n);
+        solve(in,pre,l,i-1,left,vis,n);
     }
+    else
+    ptr->left=NULL;
    if(i+1<=r)
    {
        ptr->right=right;
        solve(in,pre,i+1,r,right,vis,n);
 
    }
+   else
+   ptr->right=NULL;
 }
     
 class Solution{
