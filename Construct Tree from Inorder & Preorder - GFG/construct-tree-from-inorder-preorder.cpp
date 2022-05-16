@@ -40,20 +40,14 @@ struct Node
 };
 */
 int j;
+unordered_map<int,int>mp;
 void solve(int in[],int pre[],int l,int r,Node* ptr)
 {
     ptr->data=pre[j];
     Node *left=(Node*) malloc(sizeof(Node));
     Node *right=(Node*) malloc(sizeof(Node));
     
-    int i;
-    for( i=l;i<=r;i++)
-    {
-        if(in[i]==pre[j])
-        {
-           break;
-        }
-    }
+    int i=mp[pre[j]];
     j++;
     if(l<=i-1)
     {
@@ -77,9 +71,11 @@ class Solution{
     Node* buildTree(int in[],int pre[], int n)
     { 
         // Code here
-        int vis[n]={0};
         Node *root=(Node*) malloc(sizeof(Node));
         j=0;
+        mp.clear();
+        for(int i=0;i<n;i++)
+        mp[in[i]]=i;
         solve(in,pre,0,n-1,root);
         return root;
     }
