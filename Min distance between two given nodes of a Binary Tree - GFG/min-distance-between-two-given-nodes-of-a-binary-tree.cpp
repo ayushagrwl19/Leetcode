@@ -172,9 +172,9 @@ class Solution{
                 return (ans[0].size()+ans[1].size()-2)-2*(i-1);
             }
         }
-        int k=ans[0].size();
-        int k1=ans[1].size();
-        return abs(k-k1);
+        // int k=ans[0].size();
+        // int k1=ans[1].size();
+        return abs((int)(ans[0].size())-(int)(ans[1].size()));
     }
 };
 
