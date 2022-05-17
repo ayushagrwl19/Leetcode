@@ -93,51 +93,88 @@ struct Node
     Node* left, * right;
 }; */
 
-void store(Node* root,vector<int>* adj)
+// void store(Node* root,vector<int>* adj)
+// {
+//   if(root->left!=NULL)
+//   {
+//       adj[root->data].push_back(root->left->data);
+//       adj[root->left->data].push_back(root->data);
+//       store(root->left,adj);
+//   }
+   
+//   if(root->right!=NULL)
+//   {
+//       adj[root->data].push_back(root->right->data);
+//       adj[root->right->data].push_back(root->data);
+//       store(root->right,adj);
+//   }
+   
+// }
+// class Solution{
+//     public:
+//     /* Should return minimum distance between a and b
+//     in a tree with given root*/
+//     int findDist(Node* root, int a, int b) {
+//         // Your code here
+//         vector<int> adj[100005];
+//         store(root,adj);
+//         queue<int>q;
+//         q.push(a);
+//         int vis[100005];
+//         memset(vis,-1,sizeof(vis));
+//         vis[a]=0;
+//         while(!q.empty())
+//         {
+//             int p=q.front();
+//             q.pop();
+//             for(auto i:adj[p])
+//             {
+//                 if(vis[i]==-1)
+//                 {
+//                     vis[i]=vis[p]+1;
+//                     q.push(i);
+//                 }
+//             }
+//         }
+        
+//         return vis[b];
+//     }
+// };
+vector<vector<int>>ans;
+void path(Node* root,int a,int b,vector<int>v)
 {
-   if(root->left!=NULL)
-   {
-       adj[root->data].push_back(root->left->data);
-       adj[root->left->data].push_back(root->data);
-       store(root->left,adj);
-   }
-   
-   if(root->right!=NULL)
-   {
-       adj[root->data].push_back(root->right->data);
-       adj[root->right->data].push_back(root->data);
-       store(root->right,adj);
-   }
-   
+    if(!root)
+    return ;
+    v.push_back(root->data);
+    if(root->data==a||root->data==b)
+    {
+        ans.push_back(v);
+    }
+    path(root->left,a,b,v);
+    path(root->right,a,b,v);
+    v.pop_back();
 }
 class Solution{
     public:
     /* Should return minimum distance between a and b
     in a tree with given root*/
     int findDist(Node* root, int a, int b) {
-        // Your code here
-        vector<int> adj[100005];
-        store(root,adj);
-        queue<int>q;
-        q.push(a);
-        int vis[100005];
-        memset(vis,-1,sizeof(vis));
-        vis[a]=0;
-        while(!q.empty())
+        ans.clear();
+        if(!root)
+        return 0;
+        vector<int>v;
+        path(root,a,b,v);
+        int d=min(ans[0].size(),ans[1].size());
+        for(int i=0;i<d;i++)
         {
-            int p=q.front();
-            q.pop();
-            for(auto i:adj[p])
+            if(ans[0][i]!=ans[1][i])
             {
-                if(vis[i]==-1)
-                {
-                    vis[i]=vis[p]+1;
-                    q.push(i);
-                }
+                return (ans[0].size()+ans[1].size()-2)-2*(i-1);
             }
         }
-        
-        return vis[b];
+        int k=ans[0].size();
+        int k1=ans[1].size();
+        return abs(k-k1);
     }
 };
 
