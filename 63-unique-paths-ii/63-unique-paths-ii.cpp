@@ -4,12 +4,12 @@ int solve(int i,int j,vector<vector<int>>& grid,vector<vector<int>>& dp)
         return 0;
     if(grid[i][j]==1)
         return dp[i][j]=0;
-   
+    if(i==0&&j==0)
+        return 1;
     
        if(dp[i][j]!=-1)
         return dp[i][j];
-     if(i==0&&j==0)
-        return 1;
+    
     
     return dp[i][j]=solve(i-1,j,grid,dp)+solve(i,j-1,grid,dp);
     
